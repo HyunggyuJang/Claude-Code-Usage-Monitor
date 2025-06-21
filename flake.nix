@@ -20,6 +20,7 @@
         # Shell script for running the monitor
         claude-monitor = pkgs.writeShellScriptBin "claude-monitor" ''
           cd ${toString ./.}
+          export PATH="$PWD/.npm-global/bin:$PWD/node_modules/.bin:$PATH"
           ${pythonEnv}/bin/python ccusage_monitor.py "$@"
         '';
         
