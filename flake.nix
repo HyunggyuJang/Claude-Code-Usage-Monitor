@@ -27,20 +27,27 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             pythonEnv
-            nodejs_20  # For ccusage CLI tool
+            nodejs_20
+            npm
             claude-monitor
           ];
           
           shellHook = ''
+            # Create local npm prefix for packages
+            export npm_config_prefix="$PWD/.npm-global"
+            export PATH="$PWD/.npm-global/bin:$PATH"
+            mkdir -p "$PWD/.npm-global"
+            
             echo "🎯 Claude Code Usage Monitor Environment"
             echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
             echo "📦 Available tools:"
             echo "  • python (${pythonEnv}/bin/python)"
             echo "  • node ($(which node))"
+            echo "  • npm ($(which npm))"
             echo "  • claude-monitor - Direct script runner"
             echo ""
-            echo "🚀 Install ccusage globally:"
-            echo "  npm install -g ccusage"
+            echo "🚀 Setup ccusage (run once):"
+            echo "  npm install ccusage"
             echo ""
             echo "💡 Usage examples:"
             echo "  claude-monitor                    # Default (Pro plan)"
