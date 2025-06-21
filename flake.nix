@@ -27,8 +27,7 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             pythonEnv
-            nodejs_20
-            npm
+            nodejs_20  # includes npm
             claude-monitor
           ];
           
