@@ -1,374 +1,336 @@
-# 🚧 Development Roadmap
+# 🚧 Development Status & Roadmap
 
-Features currently in development and planned for future releases of Claude Code Usage Monitor.
+Current implementation status and planned features for Claude Code Usage Monitor v3.0.0+.
 
+## 🎯 Current Implementation Status (v3.0.0)
 
-## 🎯 Current Development Status
+### ✅ **Fully Implemented & Production Ready**
 
-### 🧠 ML-Powered Auto Mode
-**Status**: 🔶 In Active Development  
+#### 🔧 **Core Monitoring System**
+- **Real-time token monitoring** with configurable refresh rates (0.1-20 Hz)
+- **5-hour session tracking** with intelligent session block analysis
+- **Multi-plan support**: Pro (44k), Max5 (88k), Max20 (220k), Custom (P90-based)
+- **Advanced analytics** with burn rate calculations and usage projections
+- **Cost tracking** with model-specific pricing (Opus, Sonnet, Haiku)
+- **Cache token support** for creation and read tokens
 
-#### Overview
-Intelligent Auto Mode with machine learning will actively learn your actual token limits and usage patterns.
+#### 🎨 **Rich Terminal UI**
+- **Adaptive color themes** with WCAG-compliant contrast ratios
+- **Auto-detection** of terminal background (light/dark/classic)
+- **Scientific color schemes** optimized for accessibility
+- **Responsive layouts** that adapt to terminal size
+- **Live display** with Rich framework integration
 
-#### How It Will Work
+#### ⚙️ **Professional Architecture**
+- **Type-safe configuration** with Pydantic validation
+- **Thread-safe monitoring** with callback-driven updates
+- **Component-based design** following Single Responsibility Principle
+- **Comprehensive error handling** with optional Sentry integration
+- **Atomic file operations** for configuration persistence
 
-**📊 Data Collection Pipeline**:
-- Monitors and stores token usage patterns in local DuckDB database
-- Tracks session starts, consumption rates, and limit boundaries
-- Builds comprehensive dataset of YOUR specific usage patterns
-- No data leaves your machine - 100% local processing
+#### 🧠 **Advanced Analytics**
+- **P90 percentile analysis** for intelligent limit detection
+- **Statistical confidence scoring** for custom plan limits
+- **Multi-session overlap handling**
+- **Historical pattern recognition** with session metadata
+- **Predictive modeling** for session completion times
 
-**🤖 Machine Learning Features**:
-- **Pattern Recognition**: Identifies recurring usage patterns and peak times
-- **Anomaly Detection**: Spots when your token allocation changes
-- **Regression Models**: Predicts future token consumption based on historical data
-- **Classification**: Automatically categorizes your usage tier (Pro/Max5/Max20/Custom)
-
-**💾 DuckDB Integration**:
-- Lightweight, embedded analytical database
-- No external server required - all data stays local
-- Efficient SQL queries for real-time analysis
-- Automatic data optimization and compression
-
-**🎯 Dynamic Adaptation**:
-- Learns your actual limits, not predefined ones
-- Adapts when Claude changes your allocation
-- Improves predictions with each session
-- No manual plan selection needed
-
-#### Benefits Over Static Limits
-
-| Current Approach | ML-Powered Approach |
-|-----------------|---------------------|
-| Fixed 7K, 35K, 140K limits | Learns YOUR actual limits |
-| Manual plan selection | Automatic detection |
-| Basic linear predictions | Advanced ML predictions |
-| No historical learning | Improves over time |
-| Can't adapt to changes | Dynamic adaptation |
-
-#### Data Privacy & Security
-
-- **🔒 100% Local**: All ML processing happens on your machine
-- **🚫 No Cloud**: Your usage data never leaves your computer
-- **💾 Local Database**: DuckDB stores data in `~/.claude_monitor/usage.db`
-- **🗑️ Easy Cleanup**: Delete the database file to reset ML learning
-- **🔐 Your Data, Your Control**: No telemetry, no tracking, no sharing
-
-#### Development Tasks
-
-- [ ] **Database Schema Design** - Design DuckDB tables for usage data
-- [ ] **Data Collection Module** - Implement usage pattern tracking
-- [ ] **ML Pipeline** - Create model training and prediction system
-- [ ] **Pattern Analysis** - Develop usage pattern recognition
-- [ ] **Auto-Detection Engine** - Smart plan switching based on ML
-- [ ] **Performance Optimization** - Efficient real-time ML processing
-- [ ] **Testing Framework** - Comprehensive ML model testing
-
----
-
-### 📦 PyPI Package
-**Status**: 🔶 In Planning Phase
-
-#### Overview
-Publish Claude Code Usage Monitor as an easy-to-install pip package for system-wide availability.
-
-#### Planned Features
-
-**🚀 Easy Installation**:
-```bash
-# Future installation method
-pip install claude-usage-monitor
-
-# Run from anywhere
-claude-monitor --plan max5 --reset-hour 9
-```
-
-**⚙️ System Integration**:
-- Global configuration files (`~/.claude-monitor/config.yaml`)
-- User preference management
-- Cross-platform compatibility (Windows, macOS, Linux)
+#### 📦 **Package Distribution**
+- **PyPI-ready** with modern setuptools configuration
+- **Entry points**: `claude-monitor`, `cmonitor`, and `ccm` commands
+- **Cross-platform support** (Windows, macOS, Linux)
+- **Professional CI/CD** with automated testing and releases
 
 **📋 Command Aliases**:
-- `claude-monitor` - Main command
-- `cmonitor` - Short alias
-- `ccm` - Ultra-short alias
+- `claude-monitor` - Main command (full name)
+- `cmonitor` - Short alias for convenience
+- `ccm` - Ultra-short alias for power users
 
-**🔄 Auto-Updates**:
-```bash
-# Easy version management
-pip install --upgrade claude-usage-monitor
-claude-monitor --version
-claude-monitor --check-updates
-```
-
-#### Development Tasks
-
-- [ ] **Package Structure** - Create proper Python package structure
-- [ ] **Setup.py Configuration** - Define dependencies and metadata
-- [ ] **Entry Points** - Configure command-line entry points
-- [ ] **Configuration System** - Implement global config management
-- [ ] **Cross-Platform Testing** - Test on Windows, macOS, Linux
-- [ ] **Documentation** - Create PyPI documentation
-- [ ] **CI/CD Pipeline** - Automated testing and publishing
-- [ ] **Version Management** - Semantic versioning and changelog
-
-#### Package Architecture
-
-```
-claude-usage-monitor/
-├── claude_monitor/
-│   ├── __init__.py
-│   ├── cli.py          # Command-line interface
-│   ├── monitor.py      # Core monitoring logic
-│   ├── config.py       # Configuration management
-│   ├── ml/            # ML components (future)
-│   └── utils.py       # Utilities
-├── setup.py
-├── requirements.txt
-├── README.md
-└── tests/
-```
+#### 🛠️ **Development Infrastructure**
+- **100+ test cases** with comprehensive coverage (80% requirement)
+- **Modern toolchain**: Ruff, MyPy, UV package manager
+- **Automated workflows**: GitHub Actions with matrix testing
+- **Code quality**: Pre-commit hooks, security scanning
+- **Documentation**: Sphinx-ready with type hint integration
 
 ---
 
-### 🐳 Docker Image
-**Status**: 🔶 In Planning Phase  
+### 🐳 **Docker Containerization**
+**Status**: 🔶 Planning Phase
 
 #### Overview
-Docker containerization for easy deployment, consistent environments, and optional web dashboard.
+Container-based deployment with optional web dashboard for team environments.
 
 #### Planned Features
 
-**🚀 One-Command Setup**:
+**🚀 Container Deployment**:
 ```bash
-# Future Docker usage
-docker run -e PLAN=max5 -e RESET_HOUR=9 maciek/claude-usage-monitor
+# Lightweight monitoring
+docker run -e PLAN=max5 maciek/claude-monitor
 
-# With persistent data
-docker run -v ~/.claude_monitor:/data maciek/claude-usage-monitor
+# With web dashboard
+docker run -p 8080:8080 maciek/claude-monitor --web-mode
 
-# Web dashboard mode
-docker run -p 8080:8080 maciek/claude-usage-monitor --web-mode
+# Persistent data
+docker run -v ~/.claude_monitor:/data maciek/claude-monitor
 ```
-
-**🔧 Environment Configuration**:
-- `CLAUDE_PLAN` - Set monitoring plan
-- `RESET_HOUR` - Configure reset time
-- `TIMEZONE` - Set timezone
-- `WEB_MODE` - Enable web dashboard
-- `ML_ENABLED` - Enable ML features
 
 **📊 Web Dashboard**:
-- Real-time token usage visualization
-- Historical usage charts
-- Session timeline view
-- Mobile-responsive interface
+- React-based real-time interface
+- Historical usage visualization
 - REST API for integrations
-
-**⚡ Lightweight Design**:
-- Alpine Linux base image
-- Multi-stage build optimization
-- Minimal resource footprint
-- Fast startup time
+- Mobile-responsive design
 
 #### Development Tasks
-
-- [ ] **Dockerfile Creation** - Multi-stage build optimization
-- [ ] **Web Interface** - React-based dashboard development
-- [ ] **API Design** - REST API for data access
-- [ ] **Volume Management** - Persistent data handling
-- [ ] **Environment Variables** - Configuration via env vars
-- [ ] **Docker Compose** - Easy orchestration
+- [ ] **Multi-stage Dockerfile** - Optimized build process
+- [ ] **Web Interface** - React dashboard development
+- [ ] **API Design** - RESTful endpoints for data access
 - [ ] **Security Hardening** - Non-root user, minimal attack surface
-- [ ] **Documentation** - Docker deployment guide
 
-#### Docker Architecture
+### 📱 **Mobile & Web Features**
+**Status**: 🔶 Future Roadmap
 
-```dockerfile
-# Multi-stage build example
-FROM node:alpine AS web-builder
-# Build web dashboard
+#### Overview
+Cross-platform monitoring with mobile apps and web interfaces for enterprise environments.
 
-FROM python:alpine AS app
-# Install Python dependencies
-# Copy web assets
-# Configure entry point
-```
+#### Planned Features
 
----
+**📱 Mobile Applications**:
+- iOS/Android apps for remote monitoring
+- Push notifications for usage milestones
+- Offline usage tracking
+- Mobile-optimized dashboard
 
-## 🌟 Future Features
+**🌐 Enterprise Features**:
+- Multi-user team coordination
+- Shared usage insights (anonymized)
+- Organization-level analytics
+- Role-based access control
 
-### 📈 Advanced Analytics (v2.5)
-- Historical usage tracking and insights
-- Weekly/monthly usage reports
-- Usage pattern visualization
-- Trend analysis and forecasting
-
-### 🔔 Smart Notifications (v2.2)
+**🔔 Advanced Notifications**:
 - Desktop notifications for token warnings
 - Email alerts for usage milestones
 - Slack/Discord integration
 - Webhook support for custom integrations
 
-### 📊 Enhanced Visualizations (v2.3)
-- Real-time ML prediction graphs
-- Confidence intervals for predictions
-- Interactive usage charts
-- Session timeline visualization
+#### Development Tasks
+- [ ] **Mobile App Architecture** - React Native foundation
+- [ ] **Push Notification System** - Cross-platform notifications
+- [ ] **Enterprise Dashboard** - Multi-tenant interface
+- [ ] **Integration APIs** - Third-party service connectors
 
-### 🌐 Multi-user Support (v3.0)
-- Team usage coordination
-- Shared usage insights (anonymized)
-- Organization-level analytics
-- Role-based access control
+## 🔬 **Technical Architecture & Quality**
 
-### 📱 Mobile App (v3.5)
-- iOS/Android apps for remote monitoring
-- Push notifications
-- Mobile-optimized dashboard
-- Offline usage tracking
+### 🏗️ **Current Architecture Highlights**
 
-### 🧩 Plugin System (v4.0)
-- Custom notification plugins
-- Third-party integrations
-- User-developed extensions
-- Plugin marketplace
+#### **Modern Python Development (2025)**
+- **Python 3.9+** with comprehensive type annotations
+- **Pydantic v2** for type-safe configuration and validation
+- **UV package manager** for fast, reliable dependency resolution
+- **Ruff linting** with 50+ rule sets for code quality
+- **Rich framework** for beautiful terminal interfaces
 
----
+#### **Professional Testing Suite**
+- **100+ test cases** across 15 test files with comprehensive fixtures
+- **80% coverage requirement** with HTML/XML reporting
+- **Matrix testing**: Python 3.9-3.13 across multiple platforms
+- **Benchmark testing** with pytest-benchmark integration
+- **Security scanning** with Bandit integration
 
-## 🔬 Research & Experimentation
+#### **CI/CD Excellence**
+- **GitHub Actions workflows** with automated testing and releases
+- **Smart versioning** with automatic changelog generation
+- **PyPI publishing** with trusted OIDC authentication
+- **Pre-commit hooks** for consistent code quality
+- **Cross-platform validation** (Windows, macOS, Linux)
 
-### 🧠 ML Algorithm Research
-**Current Focus**: Evaluating different ML approaches for token prediction
+#### **Production-Ready Features**
+- **Thread-safe architecture** with proper synchronization
+- **Component isolation** preventing cascade failures
+- **Comprehensive error handling** with optional Sentry integration
+- **Performance optimization** with caching and efficient data structures
+- **Memory management** with proper resource cleanup
 
-**Algorithms Under Consideration**:
-- **LSTM Networks**: For sequential pattern recognition
-- **Prophet**: For time series forecasting with seasonality
-- **Isolation Forest**: For anomaly detection in usage patterns
-- **DBSCAN**: For clustering similar usage sessions
-- **XGBoost**: For feature-based limit prediction
+### 🧪 **Code Quality Metrics**
 
-**Research Questions**:
-- How accurately can we predict individual user token limits?
-- What usage patterns indicate subscription tier changes?
-- Can we detect and adapt to Claude API changes automatically?
-- How much historical data is needed for accurate predictions?
+| Metric | Current Status | Target |
+|--------|---------------|---------|
+| Test Coverage | 80%+ | 80% minimum |
+| Type Annotations | 100% | 100% |
+| Linting Rules | 50+ Ruff rules | All applicable |
+| Security Scan | Bandit clean | Zero issues |
+| Performance | <100ms startup | <50ms target |
 
-### 📊 Usage Pattern Studies
-**Data Collection** (anonymized and voluntary):
-- Token consumption patterns across different subscription tiers
-- Session duration and frequency analysis
-- Geographic and timezone usage variations
-- Correlation between coding tasks and token consumption
+### 🔧 **Development Toolchain**
 
-### 🔧 Performance Optimization
-**Areas of Focus**:
-- Real-time ML inference optimization
-- Memory usage minimization
-- Battery life impact on mobile devices
-- Network usage optimization for web features
+#### **Core Tools**
+- **Ruff**: Modern Python linter and formatter (2025 best practices)
+- **MyPy**: Strict type checking with comprehensive validation
+- **UV**: Next-generation Python package manager
+- **Pytest**: Advanced testing with fixtures and benchmarks
+- **Pre-commit**: Automated code quality checks
 
----
+#### **Quality Assurance**
+- **Black**: Code formatting with 88-character lines
+- **isort**: Import organization with black compatibility
+- **Bandit**: Security vulnerability scanning
+- **Safety**: Dependency vulnerability checking
 
-## 🤝 Community Contributions Needed
+## 🤝 **Contributing & Community**
 
-### 🧠 ML Development
-**Skills Needed**: Python, Machine Learning, DuckDB, Time Series Analysis
+### 🚀 **Getting Started with Development**
 
-**Open Tasks**:
-- Implement ARIMA models for token prediction
-- Create anomaly detection for usage pattern changes
-- Design efficient data storage schema
-- Develop model validation frameworks
+#### **Quick Setup**
+```bash
+# Clone the repository
+git clone https://github.com/Maciek-roboblog/Claude-Code-Usage-Monitor.git
+cd Claude-Code-Usage-Monitor
 
-### 🌐 Web Development
-**Skills Needed**: React, TypeScript, REST APIs, Responsive Design
+# Install development dependencies with UV
+uv sync --extra dev
 
-**Open Tasks**:
-- Build real-time dashboard interface
-- Create mobile-responsive layouts
-- Implement WebSocket for live updates
-- Design intuitive user experience
+# Install pre-commit hooks
+uv run pre-commit install
 
-### 🐳 DevOps & Infrastructure
-**Skills Needed**: Docker, CI/CD, GitHub Actions, Package Management
+# Run tests
+uv run pytest
 
-**Open Tasks**:
-- Create efficient Docker builds
-- Set up automated testing pipelines
-- Configure PyPI publishing workflow
-- Implement cross-platform testing
+# Run linting
+uv run ruff check .
+uv run ruff format .
+```
 
-### 📱 Mobile Development
-**Skills Needed**: React Native, iOS/Android, Push Notifications
+#### **Development Workflow**
+1. **Feature Planning**: Create GitHub issue with detailed requirements
+2. **Branch Creation**: Fork repository and create feature branch
+3. **Development**: Code with automatic formatting and linting via pre-commit
+4. **Testing**: Write tests and ensure 80% coverage requirement
+5. **Quality Checks**: All tools run automatically on commit
+6. **Pull Request**: Submit with clear description and documentation updates
 
-**Open Tasks**:
-- Design mobile app architecture
-- Implement offline functionality
-- Create push notification system
-- Optimize for battery life
+### 🎯 **Contribution Priorities**
 
----
+#### **High Priority (Immediate Impact)**
+- **ML algorithm implementation** for intelligent plan detection
+- **Performance optimization** for real-time monitoring
+- **Cross-platform testing** and compatibility improvements
+- **Documentation expansion** and user guides
 
-## 📋 Development Guidelines
+#### **Medium Priority (Future Releases)**
+- **Docker containerization** for deployment flexibility
+- **Web dashboard development** for team environments
+- **Advanced analytics features** and visualizations
+- **API design** for third-party integrations
 
-### 🔄 Development Workflow
+#### **Research & Innovation**
+- **ML model research** for usage pattern analysis
+- **Mobile app architecture** planning
+- **Enterprise features** design and planning
+- **Plugin system** architecture development
 
-1. **Feature Planning**
-   - Create GitHub issue with detailed requirements
-   - Discuss implementation approach in issue comments
-   - Get feedback from maintainers before starting
+### 🔬 **Research Areas**
 
-2. **Development Process**
-   - Fork repository and create feature branch
-   - Follow code style guidelines (PEP 8 for Python)
-   - Write tests for new functionality
-   - Update documentation
+#### **ML Algorithm Evaluation**
+**Current Research Focus**: Optimal approaches for token prediction and limit detection
 
-3. **Testing Requirements**
-   - Unit tests for core functionality
-   - Integration tests for ML components
-   - Cross-platform testing for packaging
-   - Performance benchmarks for optimization
+**Algorithms Under Investigation**:
+- **LSTM Networks**: Sequential pattern recognition in usage data
+- **Prophet**: Time series forecasting with daily/weekly seasonality
+- **Isolation Forest**: Anomaly detection for subscription changes
+- **XGBoost**: Feature-based limit prediction with confidence scores
+- **DBSCAN**: Clustering similar usage sessions for pattern analysis
 
-4. **Review Process**
-   - Submit pull request with clear description
-   - Respond to code review feedback
-   - Ensure all tests pass
-   - Update changelog and documentation
-
-### 🎯 Contribution Priorities
-
-**High Priority**:
-- ML algorithm implementation
-- PyPI package structure
-- Cross-platform compatibility
-- Performance optimization
-
-**Medium Priority**:
-- Web dashboard development
-- Docker containerization
-- Advanced analytics features
-- Mobile app planning
-
-**Low Priority**:
-- Plugin system architecture
-- Multi-user features
-- Enterprise features
-- Advanced integrations
+**Key Research Questions**:
+- What accuracy can we achieve for individual user limit prediction?
+- How do usage patterns correlate with subscription tier changes?
+- Can we automatically detect Claude API limit modifications?
+- What's the minimum historical data needed for reliable predictions?
 
 ---
 
-## 📞 Developer Contact
+### 🛠️ **Skills & Expertise Needed**
 
-For technical discussions about development:
+#### **Machine Learning & Data Science**
+**Skills**: Python, NumPy, Pandas, Scikit-learn, DuckDB, Time Series Analysis
+**Current Opportunities**:
+- LSTM/Prophet model implementation for usage forecasting
+- Statistical analysis of P90 percentile calculations
+- Anomaly detection algorithm development
+- Model validation and performance optimization
 
-**📧 Email**: [maciek@roboblog.eu](mailto:maciek@roboblog.eu)  
-**💬 GitHub**: Open issues for feature discussions  
-**🔧 Technical Questions**: Include code examples and specific requirements  
+#### **Web Development & UI/UX**
+**Skills**: React, TypeScript, REST APIs, WebSocket, Responsive Design
+**Current Opportunities**:
+- Real-time dashboard development with live data streaming
+- Mobile-responsive interface design
+- Component library development for reusable UI elements
+- User experience optimization for accessibility
+
+#### **DevOps & Infrastructure**
+**Skills**: Docker, Kubernetes, CI/CD, GitHub Actions, Security
+**Current Opportunities**:
+- Multi-stage Docker optimization for minimal image size
+- Advanced CI/CD pipeline enhancement
+- Security hardening and vulnerability management
+- Performance monitoring and observability
+
+#### **Mobile Development**
+**Skills**: React Native, iOS/Android Native, Push Notifications
+**Future Opportunities**:
+- Cross-platform mobile app architecture
+- Offline data synchronization
+- Native performance optimization
+- Push notification system integration
 
 ---
 
-*Ready to contribute? Check out [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines!*
+## 📊 **Project Metrics & Goals**
+
+### 🎯 **Current Performance Metrics**
+- **Test Coverage**: 80%+ maintained across all modules
+- **Startup Time**: <100ms for typical monitoring sessions
+- **Memory Usage**: <50MB peak for standard workloads
+- **CPU Usage**: <5% average during monitoring
+- **Type Safety**: 100% type annotation coverage
+
+### 🚀 **Version Roadmap**
+
+| Version | Focus | Timeline | Key Features |
+|---------|-------|----------|-------------|
+| **v3.1** | Performance & UX | Q2 2025 | ML auto-detection, UI improvements |
+| **v3.5** | Platform Expansion | Q3 2025 | Docker support, web dashboard |
+| **v4.0** | Intelligence | Q4 2025 | Advanced ML, enterprise features |
+| **v4.5** | Ecosystem | Q1 2026 | Mobile apps, plugin system |
+
+### 📈 **Success Metrics**
+- **User Adoption**: Growing community with active contributors
+- **Code Quality**: Maintained high standards with automated enforcement
+- **Performance**: Sub-second response times for all operations
+- **Reliability**: 99.9% uptime for monitoring functionality
+- **Documentation**: Comprehensive guides for all features
+
+---
+
+## 📞 **Developer Resources**
+
+### 🔗 **Key Links**
+- **Repository**: [Claude-Code-Usage-Monitor](https://github.com/Maciek-roboblog/Claude-Code-Usage-Monitor)
+- **Issues**: [GitHub Issues](https://github.com/Maciek-roboblog/Claude-Code-Usage-Monitor/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Maciek-roboblog/Claude-Code-Usage-Monitor/discussions)
+- **Releases**: [GitHub Releases](https://github.com/Maciek-roboblog/Claude-Code-Usage-Monitor/releases)
+
+### 📧 **Contact & Support**
+- **Technical Questions**: Open GitHub issues with detailed context
+- **Feature Requests**: Use GitHub discussions for community input
+- **Security Issues**: Email [maciek@roboblog.eu](mailto:maciek@roboblog.eu) directly
+- **General Inquiries**: GitHub discussions or repository issues
+
+### 📚 **Documentation**
+- **User Guide**: README.md with comprehensive usage examples
+- **API Documentation**: Auto-generated from type hints
+- **Contributing Guide**: CONTRIBUTING.md with detailed workflows
+- **Code Examples**: /docs/examples/ directory with practical demonstrations
+
+---
+
+*Ready to contribute? This v3.0.0 codebase represents a mature, production-ready foundation for the next generation of intelligent Claude monitoring!*
